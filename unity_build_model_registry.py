@@ -200,9 +200,7 @@ def build_registry_from_asset(registry_asset_path: Path, registry: dict, verbose
         registry[MODEL_KEY][domain_key] = normalized_domain_tree
     return registry
 
-
-
-def build_model_registry(registry_assets_paths: list, verbose: bool = False, testing: bool = False) -> dict:
+def build_model_registry_from_assets(registry_assets_paths: list, verbose: bool = False, testing: bool = False) -> dict:
     """Builds a new model registry from the provided files."""
     registry = {}
     registry[META_KEY_DOMAIN_LIST] = []
@@ -221,12 +219,55 @@ def build_model_registry(registry_assets_paths: list, verbose: bool = False, tes
 
 
 
+def build_model_registry_from_index(registry_indices: list, guid_index: dict, verbose: bool = False, testing: bool = False) -> dict:
+    """Builds a new model registry from pipeline registry indices (domain + locator_prefix)."""
+    registry = {}
+    registry[META_KEY_DOMAIN_LIST] = []
+    registry[META_KEY_INDEX] = {}
+    registry[MODEL_KEY] = {}
+    domain_number = 0
+    if verbose:
+        stdout.write(f"Building model registry from {len(registry_indices)} guid index strings...\n")
+    for index_entry in registry_indices:
+        domain = index_entry["domain"]
+        guid_index_str = index_entry["locator_prefix"]
+        domain_number += 1
+        if testing and domain_number > TESTING_ITERATION_LIMIT:
+            break
+        guids = []
+        for guid, path in guid_index.items():
+            if path.startswith(guid_index_str) and path.endswith(".json"):
+                guids.append(guid)
+        register_domain(guids, domain, registry, verbose)
+        registry[MODEL_KEY][domain] = guids
+        if verbose:
+            stdout.write(f"...finished adding {domain} to model registry.\n")
+    stdout.write(f"...finished building model registry from {domain_number} globs.\n")
+    return registry
+
+
+
 if __name__ == "__main__":
-    registry_asset_paths = [
-        ROOT_PATH / "Assets" / "MonoBehaviour" / "Settings.asset",
+    with open(READ_GUID_INDEX_PATH, "r", encoding="utf-8") as guid_index_file:
+        main_guid_index = json.load(guid_index_file)
+    DEFINITIONS_FOLDER_STR = "Assets\\Assets\\Definitions"
+    main_registry_indices = [
+        {"domain": "AlienTechnology", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\AlienTechnology"},
+        {"domain": "Animals", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Animals"},
+        {"domain": "Buildings", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Buildings"},
+        {"domain": "Events", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Events"},
+        {"domain": "Galaxies", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Galaxies"},
+        {"domain": "Perks", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Perks"},
+        {"domain": "Recipes", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Recipes"},
+        {"domain": "Resources", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\ResourceDefinitions"},
+        {"domain": "ResourceGroups", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\ResourceGroups"},
+        {"domain": "Seeds", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Seeds"},
+        {"domain": "Spaceships", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Spaceships"},
+        {"domain": "Peeps", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Special Peeps"},
+        {"domain": "Vehicles", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Vehicles"},
     ]
     stdout.write("Building model registry...\n")
-    model_registry = build_model_registry(registry_asset_paths, verbose=True, testing=True)
+    model_registry = build_model_registry_from_index(main_registry_indices, main_guid_index, verbose=False, testing=False)
     with open(WRITE_MODEL_REGISTRY_PATH, "w", encoding="utf-8") as model_registry_file:
         json.dump(model_registry, model_registry_file, indent=4)
     stdout.write("...done.\n")

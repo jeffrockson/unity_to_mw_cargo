@@ -1,16 +1,18 @@
-/Assets
-/Packages
-/ProjectSettings
-/zPy Archive
-/**/__pycache__/
-/apicache
-cargo_ready_domain_data.txt
-domain_data.json
+# Ripped game — never commit
+Assets/
+Packages/
+ProjectSettings/
+
+# Python
+__pycache__/
+*.pyc
+
+# Generated pipeline output
 guid_index.json
 model_registry.json
-standardized_domain_data.json
-cargo_ready_manifest.json
-pages_wiki_content.json
-user-password.cfg
-pywikibot*.lwp
-throttle.ctrl
+domain_data.json
+cargo_manifest.json
+wiki_*.json
+
+.env
+definitions_hub_reference.md

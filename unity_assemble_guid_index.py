@@ -63,4 +63,4 @@ def assemble_guid_index(verbose: bool = False, testing: bool = False) -> dict:
 
 
 if __name__ == "__main__":
-    assemble_guid_index(verbose=True, testing=True)
+    assemble_guid_index(verbose=False, testing=False)

@@ -1,6 +1,31 @@
 {
-  "comment": {
-    "Game": "Against the Storm"
+  "comments": {
+    "Game": "Beyond These Stars"
+  },
+
+  "pipeline": {
+    "registry": {
+      "mode": "guid_index",
+      "indices": [
+        { "domain": "AlienTechnology", "locator_prefix": "Assets\\Assets\\Definitions\\AlienTechnology" },
+        { "domain": "Animals",         "locator_prefix": "Assets\\Assets\\Definitions\\Animals" },
+        { "domain": "Buildings",       "locator_prefix": "Assets\\Assets\\Definitions\\Buildings" },
+        { "domain": "Events",          "locator_prefix": "Assets\\Assets\\Definitions\\Events" },
+        { "domain": "Galaxies",        "locator_prefix": "Assets\\Assets\\Definitions\\Galaxies" },
+        { "domain": "Perks",           "locator_prefix": "Assets\\Assets\\Definitions\\Perks" },
+        { "domain": "Recipes",         "locator_prefix": "Assets\\Assets\\Definitions\\Recipes" },
+        { "domain": "Resources",       "locator_prefix": "Assets\\Assets\\Definitions\\ResourceDefinitions" },
+        { "domain": "ResourceGroups",  "locator_prefix": "Assets\\Assets\\Definitions\\ResourceGroups" },
+        { "domain": "Seeds",           "locator_prefix": "Assets\\Assets\\Definitions\\Seeds" },
+        { "domain": "Spaceships",      "locator_prefix": "Assets\\Assets\\Definitions\\Spaceships" },
+        { "domain": "Peeps",           "locator_prefix": "Assets\\Assets\\Definitions\\Special Peeps" },
+        { "domain": "Vehicles",        "locator_prefix": "Assets\\Assets\\Definitions\\Vehicles" }
+      ]
+    },
+    "strings": {
+      "source": "i2",
+      "path": "Assets/Resources/I2Languages.asset"
+    }
   },
 
 
