@@ -4,9 +4,11 @@ Packages/
 ProjectSettings/
 
 # Python
+apicache/
 __pycache__/
 *.pyc
 throttle.ctrl
+pywikibot-DataBot.lwp
 
 # Generated pipeline output
 guid_index.json
