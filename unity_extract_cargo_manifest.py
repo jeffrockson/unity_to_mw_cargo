@@ -16,8 +16,6 @@ from pathlib import Path
 
 from flatten_dict import flatten
 
-from unity_orchestrator import GAME_CONFIG
-
 
 
 ROOT_PATH = Path(__file__).parent
@@ -329,11 +327,9 @@ def process_global_renames_node(node: object, config_renames: dict) -> object:
 
 
 
-def extract_cargo_manifest(standardized_domain_data: dict, verbose: bool = False, testing: bool = False) -> str:
+def extract_cargo_manifest(standardized_domain_data: dict, game_config: dict, verbose: bool = False, testing: bool = False) -> str:
     """Converts domain data and meta data into cargo-ready manifest."""
-    with open(GAME_CONFIG, "r", encoding="utf-8") as config_file:
-        config_data = json.load(config_file)
-    config_renames = config_data[CONFIG_RENAME_KEY]
+    config_renames = game_config[CONFIG_RENAME_KEY]
     for domain in list(standardized_domain_data[DOMAIN_DATA_KEY].keys()):
         domain_data = standardized_domain_data[DOMAIN_DATA_KEY][domain]
         domain_data = process_global_renames_node(domain_data, config_renames)
@@ -373,11 +369,13 @@ def extract_cargo_manifest(standardized_domain_data: dict, verbose: bool = False
 
 if __name__ == "__main__":
     with open(ROOT_PATH / "guid_index.json", "r", encoding="utf-8") as file:
-        loaded_guid_index = json.load(file)
+        main_guid_index = json.load(file)
     with open(ROOT_PATH / "standardized_domain_data.json", "r", encoding="utf-8") as file:
-        loaded_domain_data = json.load(file)
+        main_domain_data = json.load(file)
+    with open(ROOT_PATH / "unity_setup_game_config.json", "r", encoding="utf-8") as file:
+        main_game_config = json.load(file)
     stdout.write("Developing domain data into cargo manifest...\n")
-    cargo_manifest = extract_cargo_manifest(loaded_domain_data)#, verbose=True, testing=True)
+    cargo_manifest = extract_cargo_manifest(main_domain_data, main_game_config)#, verbose=True, testing=True)
     with open(WRITE_CARGO_DATA_PATH, "w", encoding="utf-8") as file:
         json.dump(cargo_manifest, file, indent=4)
     stdout.write("...done saving cargo-ready data.\n")

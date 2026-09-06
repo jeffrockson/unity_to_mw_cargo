@@ -1,4 +1,4 @@
-# pylint: disable=
+# pylint: disable=line-too-long
 """
 This script is used to build a GUID index from Unity game assets.
 
@@ -42,7 +42,7 @@ def read_asset_file(asset_path: Path, guid_index: dict, verbose: bool):
 
 
 
-def assemble_guid_index(verbose: bool = False, testing: bool = False) -> dict:
+def assemble_guid_index(verbose: bool = False, testing: bool = False, documented: bool = True) -> dict:
     """Build a new GUID index from Unity game assets."""
     guid_index = {}
     file_number = 0
@@ -54,13 +54,14 @@ def assemble_guid_index(verbose: bool = False, testing: bool = False) -> dict:
             break
         if verbose and file_number % 2000 == 0:
             stdout.write(f"...processed {file_number} files...\n")
-        read_asset_file(asset_path, guid_index, verbose)
-    with open(WRITE_INDEX_PATH, "w", encoding="utf-8") as file:
-        json.dump(guid_index, file, indent=2)
+        read_asset_file(asset_path, guid_index, verbose=False)
+    if documented:
+        with open(WRITE_INDEX_PATH, "w", encoding="utf-8") as file:
+            json.dump(guid_index, file, indent=2)
     stdout.write(f"...finished building GUID index over {file_number} total files.\n")
     return guid_index
 
 
 
 if __name__ == "__main__":
-    assemble_guid_index(verbose=False, testing=False)
+    assemble_guid_index(verbose=True, testing=False, documented=True)

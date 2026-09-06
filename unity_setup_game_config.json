@@ -7,20 +7,22 @@
     "registry": {
       "mode": "guid_index",
       "indices": [
-        { "domain": "AlienTechnology", "locator_prefix": "Assets\\Assets\\Definitions\\AlienTechnology" },
-        { "domain": "Animals",         "locator_prefix": "Assets\\Assets\\Definitions\\Animals" },
-        { "domain": "Buildings",       "locator_prefix": "Assets\\Assets\\Definitions\\Buildings" },
-        { "domain": "Events",          "locator_prefix": "Assets\\Assets\\Definitions\\Events" },
-        { "domain": "Galaxies",        "locator_prefix": "Assets\\Assets\\Definitions\\Galaxies" },
-        { "domain": "Perks",           "locator_prefix": "Assets\\Assets\\Definitions\\Perks" },
-        { "domain": "Recipes",         "locator_prefix": "Assets\\Assets\\Definitions\\Recipes" },
-        { "domain": "Resources",       "locator_prefix": "Assets\\Assets\\Definitions\\ResourceDefinitions" },
-        { "domain": "ResourceGroups",  "locator_prefix": "Assets\\Assets\\Definitions\\ResourceGroups" },
-        { "domain": "Seeds",           "locator_prefix": "Assets\\Assets\\Definitions\\Seeds" },
-        { "domain": "Spaceships",      "locator_prefix": "Assets\\Assets\\Definitions\\Spaceships" },
-        { "domain": "Peeps",           "locator_prefix": "Assets\\Assets\\Definitions\\Special Peeps" },
-        { "domain": "Vehicles",        "locator_prefix": "Assets\\Assets\\Definitions\\Vehicles" }
+        "Assets\\Assets\\Definitions\\AlienTechnology",
+        "Assets\\Assets\\Definitions\\Animals",
+        "Assets\\Assets\\Definitions\\Buildings",
+        "Assets\\Assets\\Definitions\\Events",
+        "Assets\\Assets\\Definitions\\Galaxies",
+        "Assets\\Assets\\Definitions\\Perks",
+        "Assets\\Assets\\Definitions\\Recipes",
+        "Assets\\Assets\\Definitions\\ResourceDefinitions",
+        "Assets\\Assets\\Definitions\\ResourceGroups",
+        "Assets\\Assets\\Definitions\\Seeds",
+        "Assets\\Assets\\Definitions\\Spaceships",
+        "Assets\\Assets\\Definitions\\Vehicles"
       ]
+    },
+    "domain_data": {
+      "ref_type": "name"
     },
     "strings": {
       "source": "i2",
@@ -30,94 +32,25 @@
 
 
 
-  "deduplication": [
-    {
-      "keep": {
-        "domain": "Relics",
-        "key": "m_Name"
-      },
-      "remove": {
-        "domain": "Buildings",
-        "key": "m_Name"
-      }
-    }
-  ],
+  "deduplication": [],
 
 
 
   "global_rename": {
-    "order": "sort_order",
-    "interval": "time_interval",
-    "goals": "deeds"
+    "comment_ResourceDefinitions": "Resources",
+    "Buildings": "BeyondBuildings",
+    "Recipes": "BeyondRecipes"
   },
 
 
 
   "all_domains": {
+    "strings": {
+      "key_suffix": "Term"
+    },
     "exclude": [
-      "m_ObjectHideFlags",
-      "m_CorrespondingSourceObject",
-      "m_PrefabInstance",
-      "m_PrefabAsset",
-      "m_GameObject",
-      "m_Enabled",
-      "m_EditorHideFlags",
-      "m_EditorClassIdentifier",
-      "serializationData",
-      "SerializedFormat",
-      "SerializedBytes",
-      "SerializedBytesString",
-      "Prefab",
-      "PrefabModificationsReferencedUnityObjects",
-      "PrefabModifications",
-      "SerializationNodes",
-      "prefab",
-      "pilePrefab"
-    ],
-    "expand": {
-      "icon": [
-        "m_Name",
-        "texture"
-      ],
-      "label": [
-        "m_Name",
-        "displayName",
-        "key",
-        "isHiddenCategory"
-      ]
-    }
-  },
-
-
-
-
-
-  "biomes": {
-    "exclude": [
-      "material",
-      "fields",
-      "biomeVFX",
-      "maps",
-      "music",
-      "graphics"
-    ],
-    "expand": {
-      "newcomers": [
-        "newComersInterval",
-        "baseAmount",
-        "amountPerYear",
-        "goodsAmount",
-        "races",
-        "goodsPerVillagers"
-      ]
-    }
-  },
-
-
-
-  "buildingsPerks": {
-    "exclude": [
-      "amountText"
+      "PrefabAddresses",
+      "UnlockTerm"
     ],
     "expand": {}
   },
@@ -126,589 +59,85 @@
 
   "Buildings": {
     "exclude": [
-      "hasCustomPlacingSound",
-      "allowedTerrains",
-      "blockRequiredGoodsScaling",
-      "footprintMap",
-      "showDebugName",
-      "hideInWiki",
-      "canRotate",
-      "canBeMirrored",
-      "showPopupToDestroy",
-      "canBeMovedBetween",
-      "canHaveShortcut",
-      "showAggregateAmount",
-      "sourcePreviewMode",
-      "prefabHeight",
-      "waitFramesForIcon",
-      "useFootprintGraphic",
-      "showPlacedEffect",
-      "showFinishedEffect",
-      "skipOnExport",
-      "skipIconGeneration",
-      "hideUpgradesInWiki",
-      "wikiUpgradesTooltipHeader",
-      "wikiUpgradesTooltipDesc",
-      "wikiRequirementsTooltipHeader",
-      "wikiRequirementsTooltipDesc",
-      "isClickable",
-      "forceRequirements",
-      "hideRequirementsPanel",
-      "showEntrance",
-      "overridePanelButton",
-      "interactionType",
-      "panelButtonText",
-      "ignoreWorkersValidation",
-      "idleIndiciatorHeader",
-      "idleIndiciatorDesc",
-      "staticLoop",
-      "investigationStartSound",
-      "resolvedSound",
-      "removedSound",
-      "workersAnimType",
-      "workersAnimFlag",
-      "workingAnim"
+      "ConstructionSiteModel",
+      "PeepWorkTool",
+      "PeepCarryTool",
+      "PeepFetchOverrideTool",
+      "WorkerPathingType",
+      "DefaultWorkPanel",
+      "AlternateWorkPanel",
+      "ExtraWorkPanel",
+      "ExtraWorkPanels",
+      "OverrideDamagedSound",
+      "VehicleSpawnTileAxialCoordinate",
+      "SelectionSound",
+      "OperatingSound",
+      "DisplayRules",
+      "BuildingTiles",
+      "BuildingEntryWayPointData",
+      "AlertsToIgnoreHash",
+      "ValidTileTypes",
+      "WorkerPositions",
+      "AlertsToIgnore",
+      "ShowInUI",
+      "ShowInputsOnTaskButton",
+      "IgnorePeepWorkDelta",
+      "ShowActiveToggle"
     ],
-    "expand": {
-      "displayLabel": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "aggregationTag": [
-        "m_Name"
-      ]
-    },
-    "separate": {
-      "expeditions": {
-        "domain": "buildingExpeditions",
-        "guid_prefix": "cafecafe"
+    "expand": {},
+    "separate":{
+      "BuildingTasks": {
+        "domain": "BuildingTasks",
+        "guid_prefix": "000745b5"
       }
     }
   },
 
-  "Relics": {
+
+
+  "Events": {
     "exclude": [
-      "hasCustomPlacingSound",
-      "allowedTerrains",
-      "blockRequiredGoodsScaling",
-      "footprintMap",
-      "showDebugName",
-      "hideInWiki",
-      "canRotate",
-      "canBeMirrored",
-      "showPopupToDestroy",
-      "canBeMovedBetween",
-      "canHaveShortcut",
-      "showAggregateAmount",
-      "sourcePreviewMode",
-      "prefabHeight",
-      "waitFramesForIcon",
-      "useFootprintGraphic",
-      "showPlacedEffect",
-      "showFinishedEffect",
-      "skipOnExport",
-      "skipIconGeneration",
-      "hideUpgradesInWiki",
-      "wikiUpgradesTooltipHeader",
-      "wikiUpgradesTooltipDesc",
-      "wikiRequirementsTooltipHeader",
-      "wikiRequirementsTooltipDesc",
-      "isClickable",
-      "forceRequirements",
-      "hideRequirementsPanel",
-      "showEntrance",
-      "overridePanelButton",
-      "interactionType",
-      "panelButtonText",
-      "ignoreWorkersValidation",
-      "idleIndiciatorHeader",
-      "idleIndiciatorDesc",
-      "staticLoop",
-      "investigationStartSound",
-      "resolvedSound",
-      "removedSound",
-      "workersAnimType",
-      "workersAnimFlag",
-      "workingAnim",
-      "replaces",
-      "ruin"
-    ],
-    "expand": {
-      "displayLabel": [
-        "m_Name",
-        "displayName",
-        "key"
-      ]
-    }
-  },
-
-  "workshops": {
-    "exclude": [
-      "hasCustomPlacingSound",
-      "allowedTerrains",
-      "blockRequiredGoodsScaling",
-      "footprintMap",
-      "showDebugName",
-      "hideInWiki",
-      "canRotate",
-      "canBeMirrored",
-      "showPopupToDestroy",
-      "canBeMovedBetween",
-      "canHaveShortcut",
-      "showAggregateAmount",
-      "sourcePreviewMode",
-      "prefabHeight",
-      "waitFramesForIcon",
-      "useFootprintGraphic",
-      "showPlacedEffect",
-      "showFinishedEffect",
-      "skipOnExport",
-      "skipIconGeneration",
-      "hideUpgradesInWiki",
-      "wikiUpgradesTooltipHeader",
-      "wikiUpgradesTooltipDesc",
-      "wikiRequirementsTooltipHeader",
-      "wikiRequirementsTooltipDesc",
-      "isClickable",
-      "forceRequirements",
-      "hideRequirementsPanel",
-      "showEntrance",
-      "overridePanelButton",
-      "interactionType",
-      "panelButtonText",
-      "ignoreWorkersValidation",
-      "idleIndiciatorHeader",
-      "idleIndiciatorDesc",
-      "staticLoop",
-      "investigationStartSound",
-      "resolvedSound",
-      "removedSound",
-      "workersAnimType",
-      "workersAnimFlag",
-      "workingAnim",
-      "tooltipDescription",
-      "replaces"
-    ],
-    "expand": {}
-  },
-
-  "blightPosts": {
-    "exclude": [
-      "hasCustomPlacingSound",
-      "allowedTerrains",
-      "blockRequiredGoodsScaling",
-      "footprintMap",
-      "showDebugName",
-      "hideInWiki",
-      "canRotate",
-      "canBeMirrored",
-      "showPopupToDestroy",
-      "canBeMovedBetween",
-      "canHaveShortcut",
-      "showAggregateAmount",
-      "sourcePreviewMode",
-      "prefabHeight",
-      "waitFramesForIcon",
-      "useFootprintGraphic",
-      "showPlacedEffect",
-      "showFinishedEffect",
-      "skipOnExport",
-      "skipIconGeneration",
-      "hideUpgradesInWiki",
-      "wikiUpgradesTooltipHeader",
-      "wikiUpgradesTooltipDesc",
-      "wikiRequirementsTooltipHeader",
-      "wikiRequirementsTooltipDesc",
-      "isClickable",
-      "forceRequirements",
-      "hideRequirementsPanel",
-      "showEntrance",
-      "overridePanelButton",
-      "interactionType",
-      "panelButtonText",
-      "ignoreWorkersValidation",
-      "idleIndiciatorHeader",
-      "idleIndiciatorDesc",
-      "staticLoop",
-      "investigationStartSound",
-      "resolvedSound",
-      "removedSound",
-      "workersAnimType",
-      "workersAnimFlag",
-      "workingAnim",
-      "tooltipDescription",
-      "aggregationTag",
-      "replaces",
-      "ruin"
-    ],
-    "expand": {}
-  },
-
-  "mines": {
-    "exclude": [
-      "hasCustomPlacingSound",
-      "allowedTerrains",
-      "blockRequiredGoodsScaling",
-      "footprintMap",
-      "showDebugName",
-      "hideInWiki",
-      "canRotate",
-      "canBeMirrored",
-      "showPopupToDestroy",
-      "canBeMovedBetween",
-      "canHaveShortcut",
-      "showAggregateAmount",
-      "sourcePreviewMode",
-      "prefabHeight",
-      "waitFramesForIcon",
-      "useFootprintGraphic",
-      "showPlacedEffect",
-      "showFinishedEffect",
-      "skipOnExport",
-      "skipIconGeneration",
-      "hideUpgradesInWiki",
-      "wikiUpgradesTooltipHeader",
-      "wikiUpgradesTooltipDesc",
-      "wikiRequirementsTooltipHeader",
-      "wikiRequirementsTooltipDesc",
-      "isClickable",
-      "forceRequirements",
-      "hideRequirementsPanel",
-      "showEntrance",
-      "overridePanelButton",
-      "interactionType",
-      "panelButtonText",
-      "ignoreWorkersValidation",
-      "idleIndiciatorHeader",
-      "idleIndiciatorDesc",
-      "staticLoop",
-      "investigationStartSound",
-      "resolvedSound",
-      "removedSound",
-      "workersAnimType",
-      "workersAnimFlag",
-      "workingAnim",
-      "tooltipDescription",
-      "aggregationTag",
-      "replaces"
-    ],
-    "expand": {}
-  },
-
-  "Institutions": {
-    "exclude": [
-      "hasCustomPlacingSound",
-      "allowedTerrains",
-      "blockRequiredGoodsScaling",
-      "footprintMap",
-      "showDebugName",
-      "hideInWiki",
-      "canRotate",
-      "canBeMirrored",
-      "showPopupToDestroy",
-      "canBeMovedBetween",
-      "canHaveShortcut",
-      "showAggregateAmount",
-      "sourcePreviewMode",
-      "prefabHeight",
-      "waitFramesForIcon",
-      "useFootprintGraphic",
-      "showPlacedEffect",
-      "showFinishedEffect",
-      "skipOnExport",
-      "skipIconGeneration",
-      "hideUpgradesInWiki",
-      "wikiUpgradesTooltipHeader",
-      "wikiUpgradesTooltipDesc",
-      "wikiRequirementsTooltipHeader",
-      "wikiRequirementsTooltipDesc",
-      "isClickable",
-      "forceRequirements",
-      "hideRequirementsPanel",
-      "showEntrance",
-      "overridePanelButton",
-      "interactionType",
-      "panelButtonText",
-      "ignoreWorkersValidation",
-      "idleIndiciatorHeader",
-      "idleIndiciatorDesc",
-      "staticLoop",
-      "investigationStartSound",
-      "resolvedSound",
-      "removedSound",
-      "workersAnimType",
-      "workersAnimFlag",
-      "workingAnim",
-      "tooltipDescription",
-      "replaces"
-    ],
-    "expand": {}
-  },
-
-
-
-  "difficulties": {
-    "exclude": [
-      "m_SubObjectName",
-      "m_SubObjectType"
-    ],
-    "expand": {}
-  },
-
-
-
-  "effects": {
-    "exclude": [
-      "forceShowInEditorPreview",
-      "forceHideInEditorPreview"
-    ],
-    "expand": {}
-  },
-
-
-
-  "goals": {
-    "exclude": [
-      "isAchiv",
-      "achivId",
-      "msAchivId",
-      "substitute",
-      "maxLeft"
-    ],
-    "expand": {
-      "minDifficulty": [
-        "m_Name",
-        "displayName",
-        "key",
-        "shortName"
-      ],
-      "biome": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "category": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "buildings_1_building": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "buildings_2_building": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "buildings_3_building": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "race": [
-        "m_Name",
-        "pluralName",
-        "key"
-      ],
-      "good_good": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "payment": [
-        "m_Name",
-        "displayName",
-        "key",
-        "costPerPayment",
-        "amount",
-        "good"
-      ],
-      "deposits1": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "eventModel": [
-        "m_Name",
-        "displayName",
-        "key"
-      ],
-      "modifier": [
-        "m_Name",
-        "effect"
-      ]
-    }
-  },
-
-
-
-  "metaRewards": {
-    "exclude": [
-      "lockedDescription"
-    ],
-    "expand": {}
-  },
-
-
-
-  "NaturalResources": {
-    "exclude": [
-      "villagerAnimationFlag",
-      "prefabs",
-      "gatheringSound",
-      "finalSound",
-      "defaultTreesColor",
-      "highlightedTreesColor",
-      "outOfRangeTreesColor",
-      "editorColor",
-      "editorShortcut"
-    ],
-    "expand": {}
-  },
-
-  "ResourcesDeposits": {
-    "exclude": [
-      "panelSound",
-      "villagerAnimationFlag",
-      "displayMinGradeOnIndicator",
-      "displayMinGradeInDescription",
-      "prefabs"
-    ],
-    "expand": {}
-  },
-
-  "Lakes": {
-    "exclude": [
-      "panelSound",
-      "villagerAnimationFlag",
-      "displayMinGradeOnIndicator",
-      "displayMinGradeInDescription",
-      "prefabs"
-    ],
-    "expand": {}
-  },
-
-  "Springs": {
-    "exclude": [
-      "prefabs"
-    ],
-    "expand": {}
-  },
-
-  "Waters": {
-    "exclude": [
-      "color",
-      "extractorMaterial",
-      "springPaneLoop",
-      "extractorPaneLoop"
-    ],
-    "expand": {}
-  },
-
-  "Ore": {
-    "exclude": [
-      "panelSound"
-    ],
-    "expand": {}
-  },
-
-
-
-  "orders": {
-    "exclude": [
-      "tutorialTopicStarted",
-      "tutorialTopicCompleted"
-    ],
-    "expand": {}
-  },
-
-
-
-  "Races": {
-    "exclude": [
-      "assignAction",
-      "malePrefab",
-      "femalePrefab",
-      "avatarClickSound",
-      "ambientSounds",
-      "favoringStartSound",
-      "maleNames",
-      "femaleNames",
-      "homelessIcon",
-      "homelessTooltip",
-      "homelessPenalty"
-    ],
-    "expand": {}
-  },
-
-
-
-  "recipes": {
-    "exclude": [
-      "plantingAnimFlag",
-      "harvestingAnimFlag"
-    ],
-    "expand": {}
-  },
-  "farmsRecipes": {
-    "exclude": [
-      "plantingAnimFlag",
-      "harvestingAnimFlag"
+      "BlockingRecords"
     ]
   },
 
 
 
-  "decisionTags": {
+  "Galaxies": {
     "exclude": [
-      "textIconTag"
+      "Nodes"
     ],
-    "expand": {}
+    "expand": {},
+    "separate": {
+      "SectorGenerationData": {
+        "domain": "GalaxySectors",
+        "guid_prefix": "005ec704"
+      }
+    }
   },
 
 
 
-  "traders": {
+  "ResourceDefinitions": {
     "exclude": [
-      "isInWiki",
-      "panelOpenedSound",
-      "panelClosedSound",
-      "transactionSound",
-      "arrivalSound",
-      "departureSound"
-    ],
-    "expand": {}
+      "OverlayColour",
+      "FetchTraySound",
+      "FetchWheelbarrowSound",
+      "DisplayType",
+      "PlantPrefabName"
+    ]
   },
 
 
 
-  "villagersPerks": {
+  "Spaceships": {
     "exclude": [
-      "workerSlotAnim",
-      "resolveText"
-    ],
-    "expand": {}
-  },
-
-
-
-  "worldEvents": {
-    "exclude": [
-      "interactionSound"
-    ],
-    "expand": {}
-  },
-
-
-
-  "worldSeals": {
-    "exclude": [
-      "worldZoomInSound",
-      "worldGenerationModel"
-    ],
-    "expand": {}
+      "TakeOffTime",
+      "TakeOffAnimationTransitionDistance",
+      "TakeOffDistance",
+      "LandingTouchDownTime",
+      "LandingAnimationTransitionDistance",
+      "LandingApproachDistance"
+    ]
   }
 }

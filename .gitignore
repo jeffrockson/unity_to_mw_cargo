@@ -6,13 +6,16 @@ ProjectSettings/
 # Python
 __pycache__/
 *.pyc
+throttle.ctrl
 
 # Generated pipeline output
 guid_index.json
 model_registry.json
 domain_data.json
-cargo_manifest.json
+standardized_domain_data.json
+cargo_ready_manifest.json
+pages_wiki_content.json
 wiki_*.json
 
 .env
-definitions_hub_reference.md
+user-password.cfg

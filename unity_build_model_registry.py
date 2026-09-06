@@ -24,133 +24,13 @@ from unity_helper_normalize_asset_tree import normalize_asset_tree
 
 
 ROOT_PATH = Path(__file__).parent
-READ_GUID_INDEX_PATH = ROOT_PATH / "guid_index.json"
 WRITE_MODEL_REGISTRY_PATH = ROOT_PATH / "model_registry.json"
-
-MODEL_KEY = "model_registry"
 
 META_KEY = "META_REGISTRY"
 META_KEY_DOMAIN_LIST = META_KEY + "_DOMAIN_LIST"
 META_KEY_INDEX = META_KEY + "_INDEX"
 
-REGISTRY_FIELDS_TO_EXCLUDE = [
-    "m_ObjectHideFlags",
-    "m_CorrespondingSourceObject",
-    "m_PrefabInstance",
-    "m_PrefabAsset",
-    "m_GameObject",
-    "m_Enabled",
-    "m_EditorHideFlags",
-    "m_Script",
-    "m_Name",
-    "m_EditorClassIdentifier",
-    "gameplayRaces",
-    "NeedsConsumptionTime",
-    "RewardColorRawGood",
-    "RewardColorGoodPerMin",
-    "RewardColorRawProduction",
-    "RewardColorBuildingProduction",
-    "RewardColorProfessionCapacity",
-    "RewardColorVillagers",
-    "RewardColorNewcomersRaceBonus",
-    "RewardColorBuildings",
-    "RewardColorPositiveResolveEffect",
-    "RewardColorWorkplacePerk",
-    "RewardColorNeedPerk",
-    "RewardColorNegativeResolveEffect",
-    "RewardColorPositiveReputation",
-    "RewardColorReputationPenalty",
-    "RewardColorPauseBlock",
-    "RewardColorProductionSpeed",
-    "RewardColorFuelRate",
-    "RewardColorVillagerSpeed",
-    "RewardColorNewYearEffectMultiplayer",
-    "RewardColorBuildingsStorageCapacity",
-    "RewardsColorGrassAmount",
-    "RewardColorSeasonLength",
-    "RewardColorComposite",
-    "RewardColorGladeInfo",
-    "RewardColorRecipe",
-    "RewardColorCloning",
-    "RewardColorExplosion",
-    "RewardColorMerchantsReproach",
-    "RewardColorVillagersDeath",
-    "RewardColorReplaceBuilding",
-    "RewardColorDepositsCharges",
-    "RewardColorResolveToReputationRate",
-    "RewardColorCommonPositive",
-    "RewardColorCommonNegative",
-    "DepositGladeColor",
-    "SpringGladeColor",
-    "OreGladeColor",
-    "RewardGladeColor",
-    "ThreatGladeColor",
-    "DangerousThreatGladeColor",
-    "GladesIndicatorHidingSpeed",
-    "RefundRemovedConstruction",
-    "RefundRemovedBuilding",
-    "tradesRoutesPaymentInterval",
-    "maxProductionLimit",
-    "timeUntilGoodAutoDelivery",
-    "DefaultProfession",
-    "landPatches",
-    "defaultBiome",
-    "capitalBiome",
-    "wikiCategories",
-    "wikiTopics",
-    "marketingNews",
-    "twitchFactions",
-    "topics",
-    "cornerstonesViewConfigurations",
-    "backButtonCooldown",
-    "autoSaveInterval",
-    "simpleSeasonEffectsLabel",
-    "conditionalSeasonEffectsLabel",
-    "seasonEffectsTopic",
-    "menuSkins",
-    "perksConfig",
-    "uiConfig",
-    "tooltipsConfig",
-    "tutorialsConfig",
-    "ordersConfig",
-    "goalsConfig",
-    "monitorsConfig",
-    "metaConfig",
-    "ironmanMetaConfig",
-    "embarkConfig",
-    "worldConfig",
-    "resolveConfig",
-    "challengeConfig",
-    "analyticsConfig",
-    "needsConfig",
-    "votingConfig",
-    "tipsConfig",
-    "newsConfig",
-    "locaConfig",
-    "savesSupportConfig",
-    "conditionsConfig",
-    "platformsConfig",
-    "pluginsConfig",
-    "altarConfig",
-    "tradeRoutesConfig",
-    "fuelRodsConfig",
-    "hubsConfig",
-    "blightConfig",
-    "seasonalEffectsGlobalConfig",
-    "customGameConfig",
-    "rainpunkConfig",
-    "logisticConfig",
-    "twitchConfig",
-    "gamesHistoryConfig",
-    "sealsGameplayConfig",
-    "ironmanConfig",
-    "demoConfig",
-    "storageOperationsConfig",
-    "creditsConfig",
-    "actorsBehavioursConfig",
-    "dlcsConfig",
-    "clientPrefsConfig",
-]
+MODEL_KEY = "model_registry"
 
 GUID_PATTERN = re.compile(r"([0-9a-f]{32})")
 
@@ -158,10 +38,12 @@ TESTING_ITERATION_LIMIT = 1
 
 
 
+# region registering metadata for guids
+
 def register_guid(guid: str, domain: str, registry: dict, verbose: bool):
     """Registers a guid under the specified domain."""
     if guid not in registry[META_KEY_INDEX]:
-        registry[META_KEY_INDEX][guid] = [ domain ]
+        registry[META_KEY_INDEX][guid] = [domain]
     else:
         if domain not in registry[META_KEY_INDEX][guid]:
             registry[META_KEY_INDEX][guid].append(domain)
@@ -185,13 +67,17 @@ def register_domain(domain_tree: dict|list|str, domain: str, registry: dict, ver
     elif isinstance(domain_tree, str) and GUID_PATTERN.fullmatch(domain_tree):
         register_guid(domain_tree, domain, registry, verbose)
 
+# endregion
 
 
-def build_registry_from_asset(registry_asset_path: Path, registry: dict, verbose: bool) -> dict:
+
+# region build model registry from assets
+
+def build_registry_from_asset(registry_asset_path: Path, registry_exclude_fields: list, registry: dict, verbose: bool) -> dict:
     """Builds a new model registry from one asset file."""
     asset_data = parse_yaml(registry_asset_path, verbose)
     for domain_key, raw_value in asset_data.items():
-        if domain_key in REGISTRY_FIELDS_TO_EXCLUDE:
+        if domain_key in registry_exclude_fields:
             if verbose:
                 stdout.write(f"...dropped field {domain_key}\n")
             continue
@@ -200,7 +86,7 @@ def build_registry_from_asset(registry_asset_path: Path, registry: dict, verbose
         registry[MODEL_KEY][domain_key] = normalized_domain_tree
     return registry
 
-def build_model_registry_from_assets(registry_assets_paths: list, verbose: bool = False, testing: bool = False) -> dict:
+def build_model_registry_from_assets(registry_assets_paths: list, registry_exclude_fields: list, verbose: bool = False, testing: bool = False) -> dict:
     """Builds a new model registry from the provided files."""
     registry = {}
     registry[META_KEY_DOMAIN_LIST] = []
@@ -213,14 +99,30 @@ def build_model_registry_from_assets(registry_assets_paths: list, verbose: bool 
         asset_number += 1
         if testing and asset_number > TESTING_ITERATION_LIMIT:
             break
-        build_registry_from_asset(registry_asset_path, registry, verbose)
+        build_registry_from_asset(registry_asset_path, registry_exclude_fields, registry, verbose)
     stdout.write(f"...finished building model registry from {asset_number} assets.\n")
     return registry
 
+# endregion
 
 
-def build_model_registry_from_index(registry_indices: list, guid_index: dict, verbose: bool = False, testing: bool = False) -> dict:
-    """Builds a new model registry from pipeline registry indices (domain + locator_prefix)."""
+
+#region build model registry from guid index
+
+def build_model_registry_from_guid_index_with_entry(guid_index: dict, index_entry: str, registry: dict, verbose: bool) -> None:
+    """Builds a new model registry from one guid index entry."""
+    domain = Path(index_entry).name
+    guids = []
+    for guid, path in guid_index.items():
+        if path.startswith(index_entry) and path.endswith(".json"):
+            guids.append(guid)
+    register_domain(guids, domain, registry, verbose)
+    registry[MODEL_KEY][domain] = guids
+    if verbose:
+        stdout.write(f"...finished adding {domain} to model registry.\n")
+
+def build_model_registry_from_guid_index(guid_index: dict, registry_indices: list, verbose: bool = False, testing: bool = False) -> dict:
+    """Builds a new model registry from pipeline registry indices."""
     registry = {}
     registry[META_KEY_DOMAIN_LIST] = []
     registry[META_KEY_INDEX] = {}
@@ -229,45 +131,44 @@ def build_model_registry_from_index(registry_indices: list, guid_index: dict, ve
     if verbose:
         stdout.write(f"Building model registry from {len(registry_indices)} guid index strings...\n")
     for index_entry in registry_indices:
-        domain = index_entry["domain"]
-        guid_index_str = index_entry["locator_prefix"]
         domain_number += 1
         if testing and domain_number > TESTING_ITERATION_LIMIT:
+            stdout.write(f"...testing limit reached, stopping at {domain_number} domains...\n")
             break
-        guids = []
-        for guid, path in guid_index.items():
-            if path.startswith(guid_index_str) and path.endswith(".json"):
-                guids.append(guid)
-        register_domain(guids, domain, registry, verbose)
-        registry[MODEL_KEY][domain] = guids
-        if verbose:
-            stdout.write(f"...finished adding {domain} to model registry.\n")
-    stdout.write(f"...finished building model registry from {domain_number} globs.\n")
+        build_model_registry_from_guid_index_with_entry(guid_index, index_entry, registry, verbose)
+    stdout.write(f"...finished building model registry from index entries for {domain_number} domains.\n")
     return registry
+
+# endregion
+
+
+
+def build_model_registry(guid_index: dict, game_config: dict, verbose: bool = False, testing: bool = False) -> dict:
+    """Builds a new model registry from the provided files."""
+    registry_mode = game_config["pipeline"]["registry"]["mode"]
+    if registry_mode == "guid_index":
+        registry_indices = game_config["pipeline"]["registry"]["indices"]
+        return build_model_registry_from_guid_index(guid_index, registry_indices, verbose, testing)
+    elif registry_mode == "asset":
+        registry_assets_paths = [
+            ROOT_PATH / asset_path for asset_path in game_config["pipeline"]["registry"]["assets"]
+        ]
+        registry_exclude = game_config["pipeline"]["registry"]["exclude"]
+        return build_model_registry_from_assets(registry_assets_paths, registry_exclude, verbose, testing)
+    else:
+        raise ValueError(f"Invalid registry mode: {registry_mode}")
 
 
 
 if __name__ == "__main__":
-    with open(READ_GUID_INDEX_PATH, "r", encoding="utf-8") as guid_index_file:
+    read_default_guid_index_path = ROOT_PATH / "guid_index.json"
+    read_default_config_path = ROOT_PATH / "unity_setup_game_config.json"
+    with open(read_default_guid_index_path, "r", encoding="utf-8") as guid_index_file:
         main_guid_index = json.load(guid_index_file)
-    DEFINITIONS_FOLDER_STR = "Assets\\Assets\\Definitions"
-    main_registry_indices = [
-        {"domain": "AlienTechnology", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\AlienTechnology"},
-        {"domain": "Animals", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Animals"},
-        {"domain": "Buildings", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Buildings"},
-        {"domain": "Events", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Events"},
-        {"domain": "Galaxies", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Galaxies"},
-        {"domain": "Perks", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Perks"},
-        {"domain": "Recipes", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Recipes"},
-        {"domain": "Resources", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\ResourceDefinitions"},
-        {"domain": "ResourceGroups", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\ResourceGroups"},
-        {"domain": "Seeds", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Seeds"},
-        {"domain": "Spaceships", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Spaceships"},
-        {"domain": "Peeps", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Special Peeps"},
-        {"domain": "Vehicles", "locator_prefix": DEFINITIONS_FOLDER_STR + "\\Vehicles"},
-    ]
+    with open(read_default_config_path, "r", encoding="utf-8") as game_config_file:
+        main_config = json.load(game_config_file)
     stdout.write("Building model registry...\n")
-    model_registry = build_model_registry_from_index(main_registry_indices, main_guid_index, verbose=False, testing=False)
+    model_registry = build_model_registry(main_guid_index, main_config, verbose=True, testing=False)
     with open(WRITE_MODEL_REGISTRY_PATH, "w", encoding="utf-8") as model_registry_file:
         json.dump(model_registry, model_registry_file, indent=4)
     stdout.write("...done.\n")

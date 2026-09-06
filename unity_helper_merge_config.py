@@ -6,13 +6,20 @@ import json
 from sys import stdout
 from pathlib import Path
 
-from unity_orchestrator import GAME_CONFIG
-
 
 
 ROOT_PATH = Path(__file__).parent
 
 ALL_DOMAINS_KEY = "all_domains"
+
+PIPELINE_KEY = "pipeline"
+PIPELINE_DATA_KEY = "domain_data"
+PIPELINE_REF_TYPE_KEY = "ref_type"
+
+
+DOMAIN_NAME_KEY = "_domain_name"
+STRINGS_KEY = "strings"
+
 EXCLUDE_KEY = "exclude"
 EXPAND_KEY = "expand"
 SEPARATE_KEY = "separate"
@@ -47,11 +54,15 @@ def merge_expand_dict(domain_expand: dict, all_expand: dict) -> dict:
 
 
 
-def merge_domain(domain_config: dict, all_config) -> dict:
+def merge_domain(domain_config: dict, all_domains_config: dict) -> dict:
     """Merges one domain configuration into the all-domains configuration."""
-    merged_domain_config = {}
-    merged_domain_config[EXCLUDE_KEY] = merge_exclude_list(domain_config.get(EXCLUDE_KEY, []), all_config.get(EXCLUDE_KEY, []))
-    merged_domain_config[EXPAND_KEY] = merge_expand_dict(domain_config.get(EXPAND_KEY, {}), all_config.get(EXPAND_KEY, {}))
+    merged_domain_config = {
+        DOMAIN_NAME_KEY: all_domains_config.get(DOMAIN_NAME_KEY, ""),
+        STRINGS_KEY: all_domains_config.get(STRINGS_KEY, {}),
+        PIPELINE_REF_TYPE_KEY: all_domains_config.get(PIPELINE_REF_TYPE_KEY, "guid"),
+    }
+    merged_domain_config[EXCLUDE_KEY] = merge_exclude_list(domain_config.get(EXCLUDE_KEY, []), all_domains_config.get(EXCLUDE_KEY, []))
+    merged_domain_config[EXPAND_KEY] = merge_expand_dict(domain_config.get(EXPAND_KEY, {}), all_domains_config.get(EXPAND_KEY, {}))
     if SEPARATE_KEY in domain_config:
         merged_domain_config[SEPARATE_KEY] = domain_config[SEPARATE_KEY]
     return merged_domain_config
@@ -60,16 +71,20 @@ def merge_domain(domain_config: dict, all_config) -> dict:
 
 def merge_config(all_config: dict|None, domain: str) -> dict:
     """Returns one configuration set for the specified domain."""
-    if all_config is None:
-        with open(GAME_CONFIG, "r", encoding="utf-8") as file:
-            all_config = json.load(file)
+    aug_config = {
+        DOMAIN_NAME_KEY: domain,
+        PIPELINE_REF_TYPE_KEY: all_config[PIPELINE_KEY][PIPELINE_DATA_KEY][PIPELINE_REF_TYPE_KEY]
+    }
+    aug_config.update(all_config[ALL_DOMAINS_KEY])
     if domain in all_config:
-        return merge_domain(all_config[domain], all_config[ALL_DOMAINS_KEY])
+        return merge_domain(all_config[domain], aug_config)
     else:
-        return all_config[ALL_DOMAINS_KEY]
+        return aug_config
 
 
 
 if __name__ == "__main__":
-    result = merge_config(None, "goals")
+    with open(ROOT_PATH / "unity_setup_game_config.json", "r", encoding="utf-8") as file:
+        main_game_config = json.load(file)
+    result = merge_config(main_game_config, "goals")
     stdout.write(json.dumps(result, indent=4) + "\n")
