@@ -1,4 +1,4 @@
-# pylint: disable=line-too-long, no-else-return, too-many-arguments, too-many-locals, too-many-positional-arguments, too-many-return-statements, simplifiable-if-statement
+# pylint: disable=line-too-long, no-else-return, no-else-continue, too-many-arguments, too-many-locals, too-many-positional-arguments, too-many-return-statements, simplifiable-if-statement
 
 """
 Gathers domain data for all domains from asset files in the model registry and the guid index.
@@ -467,11 +467,40 @@ def run_deduplication(all_config: dict, domain_data: dict, verbose: bool) -> Non
 
 #region separate
 
-def synthesize_new_guid(guid_prefix: str, parent_guid: str) -> str:
-    """Synthesizes a new guid based on the guid prefix and parent guid."""
+def synthesize_new_guid(guid_prefix: str, parent_guid: str, occurence_index: int = 0) -> str:
+    """32-char guid: config prefix + tail from parent; last 4 hex digits encode occurrence_index."""
     borrow_length = len(parent_guid) - len(guid_prefix)
-    new_guid = guid_prefix + parent_guid[:borrow_length]
-    return new_guid
+    parent_tail = parent_guid[:borrow_length]
+    if occurence_index:
+        parent_tail = parent_tail[:-4] + f"{occurence_index:04x}"
+    return guid_prefix + parent_tail
+
+def separate_data(parent_guid: str, parent_record: dict, separate_key: str, separation_rule: dict, all_domain_data: dict, occurence_index: int = 0) -> int:
+    """Separates the data from the parent record into a new record."""
+    if parent_record[separate_key] is None or parent_record[separate_key] == {} or parent_record[separate_key] == [] or parent_record[separate_key] == "":
+        return 0
+    subrecord_to_move = parent_record.pop(separate_key)
+    synthetic_guid = synthesize_new_guid(separation_rule[SEPARATE_GUID_PREFIX], parent_guid, occurence_index)
+    parent_record[separate_key] = synthetic_guid
+    target_domain = separation_rule[SEPARATE_DOMAIN]
+    if target_domain not in all_domain_data:
+        all_domain_data[target_domain] = {}
+    subrecord_to_move = { separate_key: subrecord_to_move }
+    all_domain_data[target_domain][synthetic_guid] = subrecord_to_move
+    return 1
+
+def run_domain_separation_on_record(parent_guid: str, record: dict, separate_key: str, separation_rule: dict, all_domain_data: dict) -> int:
+    """Runs the domain separation process on a record and returns the number of records moved."""
+    if isinstance(record, dict):
+        moved_records = 0
+        for index, subvalue in enumerate(record.values()):
+            if isinstance(subvalue, dict) and separate_key in subvalue:
+                moved_records += separate_data(parent_guid, subvalue, separate_key, separation_rule, all_domain_data, index)
+            elif isinstance(subvalue, list):
+                for index, item in enumerate(subvalue):
+                    if isinstance(item, dict) and separate_key in item:
+                        moved_records += separate_data(parent_guid, item, separate_key, separation_rule, all_domain_data, index)
+    return moved_records
 
 def run_domain_separation(all_config: dict, all_domain_data: dict, verbose: bool) -> None:
     """Runs the domain separation process on records."""
@@ -485,19 +514,10 @@ def run_domain_separation(all_config: dict, all_domain_data: dict, verbose: bool
             continue
         for guid, record in domain_data.items():
             for separate_key, separation_rule in domain_config[CONFIG_SEPARATE_KEY].items():
-                if separate_key not in record:
-                    continue
-                if record[separate_key] is None or record[separate_key] == {} or record[separate_key] == [] or record[separate_key] == "":
-                    continue
-                subrecord_to_move = record.pop(separate_key)
-                synthetic_guid = synthesize_new_guid(separation_rule[SEPARATE_GUID_PREFIX], guid)
-                record[separate_key] = synthetic_guid
-                target_domain = separation_rule[SEPARATE_DOMAIN]
-                if target_domain not in all_domain_data:
-                    all_domain_data[target_domain] = {}
-                subrecord_to_move = { separate_key: subrecord_to_move }
-                all_domain_data[target_domain][synthetic_guid] = subrecord_to_move
-                moved_records += 1
+                if separate_key in record:
+                    moved_records += separate_data(guid, record, separate_key, separation_rule, all_domain_data)
+                else:
+                    moved_records += run_domain_separation_on_record(guid, record, separate_key, separation_rule, all_domain_data)
     if verbose:
         stdout.write(f"...separated {moved_records} records...\n")
 

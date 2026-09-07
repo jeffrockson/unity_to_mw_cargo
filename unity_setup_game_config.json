@@ -39,7 +39,9 @@
   "global_rename": {
     "comment_ResourceDefinitions": "Resources",
     "Buildings": "BeyondBuildings",
-    "Recipes": "BeyondRecipes"
+    "Recipes": "BeyondRecipes",
+    "RegionGenerationData": "RegionGenData",
+    "SpaceEntityGenerationData": "SpaceEntityGenData"
   },
 
 
@@ -105,12 +107,13 @@
 
   "Galaxies": {
     "exclude": [
-      "Nodes"
+      "Nodes",
+      "EditorColourSerialized"
     ],
     "expand": {},
     "separate": {
-      "SectorGenerationData": {
-        "domain": "GalaxySectors",
+      "RegionGenerationData": {
+        "domain": "SectorRegionGenerationData",
         "guid_prefix": "005ec704"
       }
     }
