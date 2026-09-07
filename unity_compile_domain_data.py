@@ -305,7 +305,7 @@ def select_asset_data(asset_data: dict, include_list: list) -> dict:
 
 #region expand/references
 
-def replace_selected_guid(selected_key: str, guid: str, domain_config: dict, guid_index: dict, verbose: bool) -> dict:
+def replace_selected_guid(selected_key: str, guid: str, guid_index: dict, domain_config: dict, verbose: bool) -> dict:
     """Replaces a guid inside a selected field with its asset data."""
     if verbose:
         stdout.write(f"...expanding guid {guid} under selected key {selected_key}...\n")
@@ -327,7 +327,8 @@ def expand_by_ref_type(selected_key: str, selected_value: object, guid_index: di
     """Expands the selected field by the reference type."""
     ref_type = domain_config[REF_TYPE_KEY]
     if ref_type == REF_TYPE_GUID and GUID_PATTERN.fullmatch(selected_value):
-        return replace_selected_guid(selected_key, selected_value, guid_index, domain_config, verbose)
+        guid = selected_value
+        return replace_selected_guid(selected_key, guid, guid_index, domain_config, verbose)
     return selected_value
 
 def expand_selected_field(selected_key: str, selected_value: object, guid_index: dict, domain_config: dict, verbose: bool) -> object:
@@ -595,7 +596,7 @@ if __name__ == "__main__":
     with open(ROOT_PATH / "unity_setup_game_config.json", "r", encoding="utf-8") as file:
         main_game_config = json.load(file)
     stdout.write("Compiling domain data...")
-    result = compile_domain_data(main_model_registry, main_guid_index, main_game_config, verbose=True, testing=False)
+    result = compile_domain_data(main_model_registry, main_guid_index, main_game_config, verbose=False, testing=False)
     stdout.write("...done.\n")
     with open(WRITE_DOMAIN_DATA_PATH, "w", encoding="utf-8") as file:
         json.dump(result, file, indent=4)

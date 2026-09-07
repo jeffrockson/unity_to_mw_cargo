@@ -1,0 +1,826 @@
+{
+  "comment": {
+    "Game": "Against the Storm"
+  },
+
+  "pipeline": {
+    "registry": {
+      "mode": "asset",
+      "assets": [
+        "Assets\\MonoBehaviour\\Settings.asset"
+      ],
+      "exclude": [
+      "m_ObjectHideFlags",
+      "m_CorrespondingSourceObject",
+      "m_PrefabInstance",
+      "m_PrefabAsset",
+      "m_GameObject",
+      "m_Enabled",
+      "m_EditorHideFlags",
+      "m_Script",
+      "m_Name",
+      "m_EditorClassIdentifier",
+      "gameplayRaces",
+      "NeedsConsumptionTime",
+      "RewardColorRawGood",
+      "RewardColorGoodPerMin",
+      "RewardColorRawProduction",
+      "RewardColorBuildingProduction",
+      "RewardColorProfessionCapacity",
+      "RewardColorVillagers",
+      "RewardColorNewcomersRaceBonus",
+      "RewardColorBuildings",
+      "RewardColorPositiveResolveEffect",
+      "RewardColorWorkplacePerk",
+      "RewardColorNeedPerk",
+      "RewardColorNegativeResolveEffect",
+      "RewardColorPositiveReputation",
+      "RewardColorReputationPenalty",
+      "RewardColorPauseBlock",
+      "RewardColorProductionSpeed",
+      "RewardColorFuelRate",
+      "RewardColorVillagerSpeed",
+      "RewardColorNewYearEffectMultiplayer",
+      "RewardColorBuildingsStorageCapacity",
+      "RewardsColorGrassAmount",
+      "RewardColorSeasonLength",
+      "RewardColorComposite",
+      "RewardColorGladeInfo",
+      "RewardColorRecipe",
+      "RewardColorCloning",
+      "RewardColorExplosion",
+      "RewardColorMerchantsReproach",
+      "RewardColorVillagersDeath",
+      "RewardColorReplaceBuilding",
+      "RewardColorDepositsCharges",
+      "RewardColorResolveToReputationRate",
+      "RewardColorCommonPositive",
+      "RewardColorCommonNegative",
+      "DepositGladeColor",
+      "SpringGladeColor",
+      "OreGladeColor",
+      "RewardGladeColor",
+      "ThreatGladeColor",
+      "DangerousThreatGladeColor",
+      "GladesIndicatorHidingSpeed",
+      "RefundRemovedConstruction",
+      "RefundRemovedBuilding",
+      "tradesRoutesPaymentInterval",
+      "maxProductionLimit",
+      "timeUntilGoodAutoDelivery",
+      "DefaultProfession",
+      "landPatches",
+      "defaultBiome",
+      "capitalBiome",
+      "wikiCategories",
+      "wikiTopics",
+      "marketingNews",
+      "twitchFactions",
+      "topics",
+      "cornerstonesViewConfigurations",
+      "backButtonCooldown",
+      "autoSaveInterval",
+      "simpleSeasonEffectsLabel",
+      "conditionalSeasonEffectsLabel",
+      "seasonEffectsTopic",
+      "menuSkins",
+      "perksConfig",
+      "uiConfig",
+      "tooltipsConfig",
+      "tutorialsConfig",
+      "ordersConfig",
+      "goalsConfig",
+      "monitorsConfig",
+      "metaConfig",
+      "ironmanMetaConfig",
+      "embarkConfig",
+      "worldConfig",
+      "resolveConfig",
+      "challengeConfig",
+      "analyticsConfig",
+      "needsConfig",
+      "votingConfig",
+      "tipsConfig",
+      "newsConfig",
+      "locaConfig",
+      "savesSupportConfig",
+      "conditionsConfig",
+      "platformsConfig",
+      "pluginsConfig",
+      "altarConfig",
+      "tradeRoutesConfig",
+      "fuelRodsConfig",
+      "hubsConfig",
+      "blightConfig",
+      "seasonalEffectsGlobalConfig",
+      "customGameConfig",
+      "rainpunkConfig",
+      "logisticConfig",
+      "twitchConfig",
+      "gamesHistoryConfig",
+      "sealsGameplayConfig",
+      "ironmanConfig",
+      "demoConfig",
+      "storageOperationsConfig",
+      "creditsConfig",
+      "actorsBehavioursConfig",
+      "dlcsConfig",
+      "clientPrefsConfig"
+      ]
+    },
+    "domain_data": {
+      "ref_type": "guid"
+    },
+    "strings": {
+      "source": "json",
+      "path": "Assets/Resources/texts/en.json"
+    }
+  },
+
+
+
+  "deduplication": [
+    {
+      "keep": {
+        "domain": "Relics",
+        "key": "m_Name"
+      },
+      "remove": {
+        "domain": "Buildings",
+        "key": "m_Name"
+      }
+    }
+  ],
+
+
+
+  "global_rename": {
+    "order": "sort_order",
+    "interval": "time_interval",
+    "goals": "deeds"
+  },
+
+
+
+  "all_domains": {
+    "strings": {
+      "key_suffix": "key"
+    },
+    "exclude": [
+      "m_ObjectHideFlags",
+      "m_CorrespondingSourceObject",
+      "m_PrefabInstance",
+      "m_PrefabAsset",
+      "m_GameObject",
+      "m_Enabled",
+      "m_EditorHideFlags",
+      "m_EditorClassIdentifier",
+      "serializationData",
+      "SerializedFormat",
+      "SerializedBytes",
+      "SerializedBytesString",
+      "Prefab",
+      "PrefabModificationsReferencedUnityObjects",
+      "PrefabModifications",
+      "SerializationNodes",
+      "prefab",
+      "pilePrefab"
+    ],
+    "expand": {
+      "icon": [
+        "m_Name",
+        "texture"
+      ],
+      "label": [
+        "m_Name",
+        "displayName",
+        "key",
+        "isHiddenCategory"
+      ]
+    }
+  },
+
+
+
+
+
+  "biomes": {
+    "exclude": [
+      "material",
+      "fields",
+      "biomeVFX",
+      "maps",
+      "music",
+      "graphics"
+    ],
+    "expand": {
+      "newcomers": [
+        "newComersInterval",
+        "baseAmount",
+        "amountPerYear",
+        "goodsAmount",
+        "races",
+        "goodsPerVillagers"
+      ]
+    }
+  },
+
+
+
+  "buildingsPerks": {
+    "exclude": [
+      "amountText"
+    ],
+    "expand": {}
+  },
+  
+
+
+  "Buildings": {
+    "exclude": [
+      "hasCustomPlacingSound",
+      "allowedTerrains",
+      "blockRequiredGoodsScaling",
+      "footprintMap",
+      "showDebugName",
+      "hideInWiki",
+      "canRotate",
+      "canBeMirrored",
+      "showPopupToDestroy",
+      "canBeMovedBetween",
+      "canHaveShortcut",
+      "showAggregateAmount",
+      "sourcePreviewMode",
+      "prefabHeight",
+      "waitFramesForIcon",
+      "useFootprintGraphic",
+      "showPlacedEffect",
+      "showFinishedEffect",
+      "skipOnExport",
+      "skipIconGeneration",
+      "hideUpgradesInWiki",
+      "wikiUpgradesTooltipHeader",
+      "wikiUpgradesTooltipDesc",
+      "wikiRequirementsTooltipHeader",
+      "wikiRequirementsTooltipDesc",
+      "isClickable",
+      "forceRequirements",
+      "hideRequirementsPanel",
+      "showEntrance",
+      "overridePanelButton",
+      "interactionType",
+      "panelButtonText",
+      "ignoreWorkersValidation",
+      "idleIndiciatorHeader",
+      "idleIndiciatorDesc",
+      "staticLoop",
+      "investigationStartSound",
+      "resolvedSound",
+      "removedSound",
+      "workersAnimType",
+      "workersAnimFlag",
+      "workingAnim"
+    ],
+    "expand": {
+      "displayLabel": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "aggregationTag": [
+        "m_Name"
+      ]
+    },
+    "separate": {
+      "expeditions": {
+        "domain": "buildingExpeditions",
+        "guid_prefix": "cafecafe"
+      }
+    }
+  },
+
+  "Relics": {
+    "exclude": [
+      "hasCustomPlacingSound",
+      "allowedTerrains",
+      "blockRequiredGoodsScaling",
+      "footprintMap",
+      "showDebugName",
+      "hideInWiki",
+      "canRotate",
+      "canBeMirrored",
+      "showPopupToDestroy",
+      "canBeMovedBetween",
+      "canHaveShortcut",
+      "showAggregateAmount",
+      "sourcePreviewMode",
+      "prefabHeight",
+      "waitFramesForIcon",
+      "useFootprintGraphic",
+      "showPlacedEffect",
+      "showFinishedEffect",
+      "skipOnExport",
+      "skipIconGeneration",
+      "hideUpgradesInWiki",
+      "wikiUpgradesTooltipHeader",
+      "wikiUpgradesTooltipDesc",
+      "wikiRequirementsTooltipHeader",
+      "wikiRequirementsTooltipDesc",
+      "isClickable",
+      "forceRequirements",
+      "hideRequirementsPanel",
+      "showEntrance",
+      "overridePanelButton",
+      "interactionType",
+      "panelButtonText",
+      "ignoreWorkersValidation",
+      "idleIndiciatorHeader",
+      "idleIndiciatorDesc",
+      "staticLoop",
+      "investigationStartSound",
+      "resolvedSound",
+      "removedSound",
+      "workersAnimType",
+      "workersAnimFlag",
+      "workingAnim",
+      "replaces",
+      "ruin"
+    ],
+    "expand": {
+      "displayLabel": [
+        "m_Name",
+        "displayName",
+        "key"
+      ]
+    }
+  },
+
+  "workshops": {
+    "exclude": [
+      "hasCustomPlacingSound",
+      "allowedTerrains",
+      "blockRequiredGoodsScaling",
+      "footprintMap",
+      "showDebugName",
+      "hideInWiki",
+      "canRotate",
+      "canBeMirrored",
+      "showPopupToDestroy",
+      "canBeMovedBetween",
+      "canHaveShortcut",
+      "showAggregateAmount",
+      "sourcePreviewMode",
+      "prefabHeight",
+      "waitFramesForIcon",
+      "useFootprintGraphic",
+      "showPlacedEffect",
+      "showFinishedEffect",
+      "skipOnExport",
+      "skipIconGeneration",
+      "hideUpgradesInWiki",
+      "wikiUpgradesTooltipHeader",
+      "wikiUpgradesTooltipDesc",
+      "wikiRequirementsTooltipHeader",
+      "wikiRequirementsTooltipDesc",
+      "isClickable",
+      "forceRequirements",
+      "hideRequirementsPanel",
+      "showEntrance",
+      "overridePanelButton",
+      "interactionType",
+      "panelButtonText",
+      "ignoreWorkersValidation",
+      "idleIndiciatorHeader",
+      "idleIndiciatorDesc",
+      "staticLoop",
+      "investigationStartSound",
+      "resolvedSound",
+      "removedSound",
+      "workersAnimType",
+      "workersAnimFlag",
+      "workingAnim",
+      "tooltipDescription",
+      "replaces"
+    ],
+    "expand": {}
+  },
+
+  "blightPosts": {
+    "exclude": [
+      "hasCustomPlacingSound",
+      "allowedTerrains",
+      "blockRequiredGoodsScaling",
+      "footprintMap",
+      "showDebugName",
+      "hideInWiki",
+      "canRotate",
+      "canBeMirrored",
+      "showPopupToDestroy",
+      "canBeMovedBetween",
+      "canHaveShortcut",
+      "showAggregateAmount",
+      "sourcePreviewMode",
+      "prefabHeight",
+      "waitFramesForIcon",
+      "useFootprintGraphic",
+      "showPlacedEffect",
+      "showFinishedEffect",
+      "skipOnExport",
+      "skipIconGeneration",
+      "hideUpgradesInWiki",
+      "wikiUpgradesTooltipHeader",
+      "wikiUpgradesTooltipDesc",
+      "wikiRequirementsTooltipHeader",
+      "wikiRequirementsTooltipDesc",
+      "isClickable",
+      "forceRequirements",
+      "hideRequirementsPanel",
+      "showEntrance",
+      "overridePanelButton",
+      "interactionType",
+      "panelButtonText",
+      "ignoreWorkersValidation",
+      "idleIndiciatorHeader",
+      "idleIndiciatorDesc",
+      "staticLoop",
+      "investigationStartSound",
+      "resolvedSound",
+      "removedSound",
+      "workersAnimType",
+      "workersAnimFlag",
+      "workingAnim",
+      "tooltipDescription",
+      "aggregationTag",
+      "replaces",
+      "ruin"
+    ],
+    "expand": {}
+  },
+
+  "mines": {
+    "exclude": [
+      "hasCustomPlacingSound",
+      "allowedTerrains",
+      "blockRequiredGoodsScaling",
+      "footprintMap",
+      "showDebugName",
+      "hideInWiki",
+      "canRotate",
+      "canBeMirrored",
+      "showPopupToDestroy",
+      "canBeMovedBetween",
+      "canHaveShortcut",
+      "showAggregateAmount",
+      "sourcePreviewMode",
+      "prefabHeight",
+      "waitFramesForIcon",
+      "useFootprintGraphic",
+      "showPlacedEffect",
+      "showFinishedEffect",
+      "skipOnExport",
+      "skipIconGeneration",
+      "hideUpgradesInWiki",
+      "wikiUpgradesTooltipHeader",
+      "wikiUpgradesTooltipDesc",
+      "wikiRequirementsTooltipHeader",
+      "wikiRequirementsTooltipDesc",
+      "isClickable",
+      "forceRequirements",
+      "hideRequirementsPanel",
+      "showEntrance",
+      "overridePanelButton",
+      "interactionType",
+      "panelButtonText",
+      "ignoreWorkersValidation",
+      "idleIndiciatorHeader",
+      "idleIndiciatorDesc",
+      "staticLoop",
+      "investigationStartSound",
+      "resolvedSound",
+      "removedSound",
+      "workersAnimType",
+      "workersAnimFlag",
+      "workingAnim",
+      "tooltipDescription",
+      "aggregationTag",
+      "replaces"
+    ],
+    "expand": {}
+  },
+
+  "Institutions": {
+    "exclude": [
+      "hasCustomPlacingSound",
+      "allowedTerrains",
+      "blockRequiredGoodsScaling",
+      "footprintMap",
+      "showDebugName",
+      "hideInWiki",
+      "canRotate",
+      "canBeMirrored",
+      "showPopupToDestroy",
+      "canBeMovedBetween",
+      "canHaveShortcut",
+      "showAggregateAmount",
+      "sourcePreviewMode",
+      "prefabHeight",
+      "waitFramesForIcon",
+      "useFootprintGraphic",
+      "showPlacedEffect",
+      "showFinishedEffect",
+      "skipOnExport",
+      "skipIconGeneration",
+      "hideUpgradesInWiki",
+      "wikiUpgradesTooltipHeader",
+      "wikiUpgradesTooltipDesc",
+      "wikiRequirementsTooltipHeader",
+      "wikiRequirementsTooltipDesc",
+      "isClickable",
+      "forceRequirements",
+      "hideRequirementsPanel",
+      "showEntrance",
+      "overridePanelButton",
+      "interactionType",
+      "panelButtonText",
+      "ignoreWorkersValidation",
+      "idleIndiciatorHeader",
+      "idleIndiciatorDesc",
+      "staticLoop",
+      "investigationStartSound",
+      "resolvedSound",
+      "removedSound",
+      "workersAnimType",
+      "workersAnimFlag",
+      "workingAnim",
+      "tooltipDescription",
+      "replaces"
+    ],
+    "expand": {}
+  },
+
+
+
+  "difficulties": {
+    "exclude": [
+      "m_SubObjectName",
+      "m_SubObjectType"
+    ],
+    "expand": {}
+  },
+
+
+
+  "effects": {
+    "exclude": [
+      "forceShowInEditorPreview",
+      "forceHideInEditorPreview"
+    ],
+    "expand": {}
+  },
+
+
+
+  "goals": {
+    "exclude": [
+      "isAchiv",
+      "achivId",
+      "msAchivId",
+      "substitute",
+      "maxLeft"
+    ],
+    "expand": {
+      "minDifficulty": [
+        "m_Name",
+        "displayName",
+        "key",
+        "shortName"
+      ],
+      "biome": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "category": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "buildings_1_building": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "buildings_2_building": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "buildings_3_building": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "race": [
+        "m_Name",
+        "pluralName",
+        "key"
+      ],
+      "good_good": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "payment": [
+        "m_Name",
+        "displayName",
+        "key",
+        "costPerPayment",
+        "amount",
+        "good"
+      ],
+      "deposits1": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "eventModel": [
+        "m_Name",
+        "displayName",
+        "key"
+      ],
+      "modifier": [
+        "m_Name",
+        "effect"
+      ]
+    }
+  },
+
+
+
+  "metaRewards": {
+    "exclude": [
+      "lockedDescription"
+    ],
+    "expand": {}
+  },
+
+
+
+  "NaturalResources": {
+    "exclude": [
+      "villagerAnimationFlag",
+      "prefabs",
+      "gatheringSound",
+      "finalSound",
+      "defaultTreesColor",
+      "highlightedTreesColor",
+      "outOfRangeTreesColor",
+      "editorColor",
+      "editorShortcut"
+    ],
+    "expand": {}
+  },
+
+  "ResourcesDeposits": {
+    "exclude": [
+      "panelSound",
+      "villagerAnimationFlag",
+      "displayMinGradeOnIndicator",
+      "displayMinGradeInDescription",
+      "prefabs"
+    ],
+    "expand": {}
+  },
+
+  "Lakes": {
+    "exclude": [
+      "panelSound",
+      "villagerAnimationFlag",
+      "displayMinGradeOnIndicator",
+      "displayMinGradeInDescription",
+      "prefabs"
+    ],
+    "expand": {}
+  },
+
+  "Springs": {
+    "exclude": [
+      "prefabs"
+    ],
+    "expand": {}
+  },
+
+  "Waters": {
+    "exclude": [
+      "color",
+      "extractorMaterial",
+      "springPaneLoop",
+      "extractorPaneLoop"
+    ],
+    "expand": {}
+  },
+
+  "Ore": {
+    "exclude": [
+      "panelSound"
+    ],
+    "expand": {}
+  },
+
+
+
+  "orders": {
+    "exclude": [
+      "tutorialTopicStarted",
+      "tutorialTopicCompleted"
+    ],
+    "expand": {}
+  },
+
+
+
+  "Races": {
+    "exclude": [
+      "assignAction",
+      "malePrefab",
+      "femalePrefab",
+      "avatarClickSound",
+      "ambientSounds",
+      "favoringStartSound",
+      "maleNames",
+      "femaleNames",
+      "homelessIcon",
+      "homelessTooltip",
+      "homelessPenalty"
+    ],
+    "expand": {}
+  },
+
+
+
+  "recipes": {
+    "exclude": [
+      "plantingAnimFlag",
+      "harvestingAnimFlag"
+    ],
+    "expand": {}
+  },
+  "farmsRecipes": {
+    "exclude": [
+      "plantingAnimFlag",
+      "harvestingAnimFlag"
+    ]
+  },
+
+
+
+  "decisionTags": {
+    "exclude": [
+      "textIconTag"
+    ],
+    "expand": {}
+  },
+
+
+
+  "traders": {
+    "exclude": [
+      "isInWiki",
+      "panelOpenedSound",
+      "panelClosedSound",
+      "transactionSound",
+      "arrivalSound",
+      "departureSound"
+    ],
+    "expand": {}
+  },
+
+
+
+  "villagersPerks": {
+    "exclude": [
+      "workerSlotAnim",
+      "resolveText"
+    ],
+    "expand": {}
+  },
+
+
+
+  "worldEvents": {
+    "exclude": [
+      "interactionSound"
+    ],
+    "expand": {}
+  },
+
+
+
+  "worldSeals": {
+    "exclude": [
+      "worldZoomInSound",
+      "worldGenerationModel"
+    ],
+    "expand": {}
+  }
+}
