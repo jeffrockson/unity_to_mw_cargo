@@ -172,7 +172,7 @@ def build_guid_index_pages(index: dict) -> dict:
             CONTENT_PAGES_NAMESPACE_KEY: TEMPLATE_NAMESPACE,
             CONTENT_PAGES_TITLE_KEY: template_page_title,
             CONTENT_PAGES_CONTENT_KEY: format_template_page(declare, attach, store)
-        }    
+        }
     ]
     index_records = paginate_index_entries(entries)
     index_pages.extend(index_records)
