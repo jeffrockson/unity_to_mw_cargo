@@ -656,6 +656,15 @@
   },
 
 
+  "Goods": {
+    "exclude": [
+      "consoleId",
+      "skipOnExport"
+    ],
+    "expand": {}
+  },
+
+
 
   "metaRewards": {
     "exclude": [
