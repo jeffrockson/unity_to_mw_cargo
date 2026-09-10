@@ -37,9 +37,7 @@
 
 
   "global_rename": {
-    "comment_ResourceDefinitions": "Resources",
-    "Buildings": "BeyondBuildings",
-    "Recipes": "BeyondRecipes",
+    "ResourceDefinitions": "Resources",
     "RegionGenerationData": "RegionGenData",
     "SpaceEntityGenerationData": "SpaceEntityGenData"
   },
