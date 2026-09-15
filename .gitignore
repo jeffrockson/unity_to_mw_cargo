@@ -21,3 +21,5 @@ wiki_*.json
 
 .env
 user-password.cfg
+
+*.png

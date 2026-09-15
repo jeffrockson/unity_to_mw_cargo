@@ -46,8 +46,8 @@ META_TYPE_INDEXED_STRING = "String"
 GUID_PATTERN = re.compile(r"([0-9a-f]{32})")
 UNIQUE_NAME_PATTERN = re.compile(r"m_Name")
 
-DISPLAY_NAME_SEARCHER = re.compile(r'\|displayName_key_en=(.*)')
-UNIQUE_NAME_SEARCHER = re.compile(r'\|m_Name=(.*)')
+DISPLAY_NAME_SEARCHER = re.compile(r'\|(?:displayName_key_en|DisplayNameTerm_en)=(.*)')
+UNIQUE_NAME_SEARCHER = re.compile(r'\|(?:m_Name|Name)=(.*)')
 
 FINAL_FIELD_TYPE = "type"
 
