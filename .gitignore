@@ -17,9 +17,10 @@ domain_data.json
 standardized_domain_data.json
 cargo_ready_manifest.json
 pages_wiki_content.json
-wiki_*.json
+icon_manifest.json
 
 .env
 user-password.cfg
 
 *.png
+rendered_icons/

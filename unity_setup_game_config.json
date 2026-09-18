@@ -30,6 +30,27 @@
     }
   },
 
+  "icon_postprocess": {
+    "output_dir": "rendered_icons",
+    "y_flip": true,
+    "derive_icons": {
+      "icon_fields": [
+        "IconAddress",
+        "FootprintIconAddress"
+      ],
+      "search_folders": [
+        "Assets/Assets/UI/Sprite Sheets",
+        "Assets/Sprite"
+      ]
+    },
+    "add_icons": [
+      { 
+        "folder": "Assets/Sprite", 
+        "prefix": "BuildingPortrait_" 
+      }
+    ]
+  },
+
 
 
   "deduplication": [],
